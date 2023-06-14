@@ -9,8 +9,8 @@
 body {
   background: linear-gradient(
     90deg,
-    rgb(140, 123, 247) 0%,
-    rgb(69, 52, 182) 100%
+    rgb(169, 158, 239) 0%,
+    rgb(90, 70, 214) 100%
   );
 }
 .todo-app {
@@ -32,13 +32,20 @@ h1 {
   font-size: 24px;
 }
 
+h2{ 
+  color: white;
+  text-align: center;
+  margin: 10px;
+  text-transform: uppercase;
+  font-size: 1rem;
+}
 .complete {
   text-decoration: line-through;
   opacity: 0.4;
 }
 
 .todo-form {
-  margin-bottom: 32px;
+  margin-bottom: 22px;
 }
 
 .todo-input {
@@ -68,6 +75,26 @@ h1 {
   );
   color: #fff;
   text-transform: capitalize;
+}
+.button-reset {
+  padding: 8px;
+  width: 100px;
+  margin: 10px auto;
+  margin-bottom: 22px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  outline: none;
+  background: linear-gradient(
+    90deg,
+    rgba(93, 12, 255, 1) 0%,
+    rgba(155, 0, 250, 1) 100%
+  );
+  color: #fff;
+  text-transform: capitalize;
+}
+.button-reset:hover, .todo-button:hover {
+  opacity: 0.8;
 }
 
 .todo-input.edit {
@@ -142,6 +169,16 @@ h1 {
   color: #fff;
 }
 
+
 .edit-icon {
+  color: #fff;
+}
+.edit-icon:hover, .delete-icon:hover, .check-icon:hover {
+  cursor: pointer;
+  scale: 1.2;
+}
+
+.check-icon {
+  margin-right: 5px;
   color: #fff;
 }

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import TodoForm from './TodoForm';
 import Todo from './Todo';
+import RestBtn from './RestBtn';
 
 function TodoList() {
   const [todos, setTodos] = useState([]);
@@ -10,13 +11,7 @@ function TodoList() {
       return;
     }
 
-	const newTodo = {
-		id: Math.floor(Math.random() * 10000),
-		text: todo.text,
-		isComplete: false
-	  };
-	
-    const newTodos = [newTodo, ...todos];
+    const newTodos = [todo, ...todos];
 
     setTodos(newTodos);
     console.log(...todos);
@@ -39,26 +34,50 @@ function TodoList() {
   const completeTodo = id => {
     let updatedTodos = todos.map(todo => {
       if (todo.id === id) {
-		return {
-			...todo,
-			isComplete: !todo.isComplete
-		}
+        todo.isComplete = !todo.isComplete;
       }
       return todo;
     });
     setTodos(updatedTodos);
   };
 
+  const toggleTodoHandler = (id) => {
+	setTodos(
+		todos.map((todo) => {
+			return todo.id === id
+				? { ...todo, isCompleted: !todo.isCompleted }
+				: { ...todo }
+		})
+	)
+	}
+
+	const resetTodosHandler = () => {
+        setTodos([])
+    }
+
+	const completedTodoCount = todos.filter((item) => item.isComplete).length
+
+
   return (
     <>
-      <h1>What's the schedule for today?</h1>
-      <TodoForm onSubmit={addTodo} />
-      <Todo
-        todos={todos}
-        completeTodo={completeTodo}
-        removeTodo={removeTodo}
-        updateTodo={updateTodo}
-      />
+		<h1>What's the Plan for Today?</h1>
+		<TodoForm onSubmit={addTodo} />
+		{todos.length > 0 && (
+			<RestBtn resetTodos={resetTodosHandler}/>
+		)}
+		<Todo
+			todos={todos}
+			completeTodo={completeTodo}
+			removeTodo={removeTodo}
+			updateTodo={updateTodo}
+			toggleTodo={toggleTodoHandler}
+		/>
+
+		{completedTodoCount > 0 && (
+			<h2>
+				Congratulations ! <br />
+				You have completed {completedTodoCount} {completedTodoCount > 1 ? 'todos' : 'todo'}
+			</h2>)}
     </>
   );
 }
